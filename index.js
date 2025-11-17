@@ -11,10 +11,18 @@ const app=express()
 
 DbCon()
 
+app.options('*', cors()); 
+
 app.use(cors({
+    origin: [
+        'https://mern-note-app-frontend-zeta.vercel.app',
+        'http://localhost:5173'
+    ],
     credentials: true,
-    origin: 'http://localhost:5174'  
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
 app.use(cookieParser())
 app.use(express.json())
 app.use('/auth',AuthRoutes)
